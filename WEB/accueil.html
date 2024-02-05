@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            position: relative;
+            text-align: center;
+        }
+
+        header img {
+            width: 100%;
+            height: auto;
+        }
+
+        .nav-links {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            box-sizing: border-box;
+            z-index: 1;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            width: 100%;
+            z-index: 1;
+            text-align: center;
+        }
+
+        section {
+            text-align: center;
+            padding: 20px;
+        }
+
+        section img {
+            width: 200px;
+            height: auto;
+            margin: 10px;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Projets et tâches</a>
+            <a href="#">Liste employés</a>
+            <a href="inscription.html">Inscription</a>
+        </div>
+        <img src="C:/Users/sameh/Downloads/img1.jpg" alt="Image 1" height="300" width="350">        
+    </header>
+    
+
+    <!-- Contenu -->
+    <section>
+        <h1>Bienvenue au Site</h1>
+        <h6>Nous proposons une gestion des tâches et projets dans votre entreprise</h6>
+        <h3>Nos Valeurs</h3>
+        <div class="image-container">
+            <div>
+                <img src="C:/Users/sameh/Downloads/img2.jpg" alt="Image 2">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor.</p>
+            </div>
+            <div>
+                <img src="C:/Users/sameh/Downloads/img3.jpg" alt="Image 3">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor.</p>
+            </div>
+            <div>
+                <img src="C:/Users/sameh/Downloads/img4.jpg" alt="Image 4">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Email: <a href="mailto:exemple@email.com">exemple@email.com</a></p>
+        <p>Adresse: 123 Rue de l'Exemple, Ville</p>
+    </footer>
+
+</body>
+</html>
