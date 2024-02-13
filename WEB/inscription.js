@@ -1,59 +1,72 @@
-function validateForm() {
-  var nom = document.forms["inscriptionForm"]["nom"].value;
-  var prenom = document.forms["inscriptionForm"]["prenom"].value;
-  var email = document.forms["inscriptionForm"]["email"].value;
-  var telephone = document.forms["inscriptionForm"]["telephone"].value;
-  var dateNaissance = document.forms["inscriptionForm"]["dateNaissance"].value;
-  var motDePasse = document.forms["inscriptionForm"]["motDePasse"].value;
+var formElement=document.getElementById("form")
+var nameElement=document.getElementById("Nom")
+var prenomElement=document.getElementById("prenom")
+var elementdate= document.getElementById("date_naissance")
+var elementemail=document.getElementById("email")
+formElement.addEventListener("submit",function(event){
+                                                         event.preventDefault()
+                                                         validateName()
+                                                         validerDateOfBirth()
+                                                         validatePrenom()
+                                                        validatemail()})    
 
-  var lettersOnlyRegex = /^[A-Za-z]+$/;
-  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  var telephoneRegex = /^\d{8}$/;
-  var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+function validerDateOfBirth() 
+{
+    var elementvalue= new Date(elementdate.value)
+    const dateAujourdhui=new Date();
+    if(elementvalue>=dateAujourdhui)
+        dateError.innerHTML="<span style='color :red'>please select a date that is before today</span>"
+    else
+    dateError.innerHTML="<span style='color :green'>Correct</span>"
+}
 
-  var isValid = true;
+function validateName()
+{
+    var NameValue = nameElement.value ;
+    var pattern =/^[a-z A-Z]+$/
+    if(!NameValue.match(pattern)){
+        nameError.innerHTML="<span style='color :red'> nom ne doit contenir que des lettres et doit avoir au minimum 1 lettre </span>"
+    }else
+    {
+        nameError.innerHTML="<span style='color :green'>Correct</span>"
+    }
+}
+function validateEmail(email) {
+    var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
+var emailInput = document.getElementById("emailInput");
+var validationMessage = document.getElementById("emailValidationMessage");
+emailInput.addEventListener("keyup", function() {
+    var email = emailInput.value;
+    if (validateEmail(email)) {
+        validationMessage.textContent = "Email is valid";
+        validationMessage.style.color = "green";
+    } else {
+        validationMessage.textContent = "Email is invalid";
+        validationMessage.style.color = "red";
+    }
+});
+function validatePassword(password) {
+    if (password.length < 8) {
+        return false;
+    }
 
-  if (nom == "" || !nom.match(lettersOnlyRegex) || nom.length < 2) {
-      document.getElementById("nomError").textContent = "Veuillez entrer un nom valide (lettres uniquement)";
-      isValid = false;
-  } else {
-      document.getElementById("nomError").textContent = "";
-  }
+    var hasLowercase = /[a-z]/.test(password);
+    var hasUppercase = /[A-Z]/.test(password);
+    var hasDigit = /\d/.test(password);
 
-  if (prenom == "" || !prenom.match(lettersOnlyRegex) || prenom.length < 2) {
-      document.getElementById("prenomError").textContent = "Veuillez entrer un prénom valide (lettres uniquement)";
-      isValid = false;
-  } else {
-      document.getElementById("prenomError").textContent = "";
-  }
-
-  if (email == "" || !email.match(emailRegex)) {
-      document.getElementById("emailError").textContent = "Veuillez entrer une adresse email valide";
-      isValid = false;
-  } else {
-      document.getElementById("emailError").textContent = "";
-  }
-
-  if (telephone == "" || !telephone.match(telephoneRegex)) {
-      document.getElementById("telephoneError").textContent = "Veuillez entrer un numéro de téléphone valide (8 chiffres)";
-      isValid = false;
-  } else {
-      document.getElementById("telephoneError").textContent = "";
-  }
-
-  if (dateNaissance == "") {
-      document.getElementById("dateNaissanceError").textContent = "Veuillez entrer une date de naissance";
-      isValid = false;
-  } else {
-      document.getElementById("dateNaissanceError").textContent = "";
-  }
-
-  if (motDePasse == "" || !motDePasse.match(passwordRegex)) {
-      document.getElementById("motDePasseError").textContent = "Veuillez entrer un mot de passe valide (8 caractères minimum, incluant au moins un chiffre, une lettre minuscule et une lettre majuscule)";
-      isValid = false;
-  } else {
-      document.getElementById("motDePasseError").textContent = "";
-  }
-
-  return isValid;
+    return hasLowercase && hasUppercase && hasDigit;
+}
+function validatetel()
+{
+    var telvalue=elementtel.value
+    var pattern=/^[0-9]{8}$/
+    if(!telvalue.match(pattern))
+    {
+        telError.innerHTML="<span style='color: red'>Numero de telephone doit contenir exactement 8 chiffres</span>";
+    }else
+    {
+        telError.innerHTML="<span style='color: green'>Correct</span>";
+    }
 }
