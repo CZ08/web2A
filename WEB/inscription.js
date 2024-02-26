@@ -1,72 +1,103 @@
-var formElement=document.getElementById("form")
-var nameElement=document.getElementById("Nom")
-var prenomElement=document.getElementById("prenom")
-var elementdate= document.getElementById("date_naissance")
-var elementemail=document.getElementById("email")
-formElement.addEventListener("submit",function(event){
-                                                         event.preventDefault()
-                                                         validateName()
-                                                         validerDateOfBirth()
-                                                         validatePrenom()
-                                                        validatemail()})    
+var formElement = document.getElementById("Form");
+  var nomElement = document.getElementById("nom");
+  var prenomElement = document.getElementById("prenom");
+  var emailElement = document.getElementById("email");
+  var telElement = document.getElementById("telephone");
+  var dateElement = document.getElementById("dateNaissance");
+  var passwordElement = document.getElementById("motDePasse");
 
-function validerDateOfBirth() 
-{
-    var elementvalue= new Date(elementdate.value)
-    const dateAujourdhui=new Date();
-    if(elementvalue>=dateAujourdhui)
-        dateError.innerHTML="<span style='color :red'>please select a date that is before today</span>"
-    else
-    dateError.innerHTML="<span style='color :green'>Correct</span>"
-}
+  formElement.addEventListener("submit", function(event){
+    event.preventDefault();
+    ValidateForm();
+  })
 
-function validateName()
-{
-    var NameValue = nameElement.value ;
-    var pattern =/^[a-z A-Z]+$/
-    if(!NameValue.match(pattern)){
-        nameError.innerHTML="<span style='color :red'> nom ne doit contenir que des lettres et doit avoir au minimum 1 lettre </span>"
-    }else
-    {
-        nameError.innerHTML="<span style='color :green'>Correct</span>"
-    }
-}
-function validateEmail(email) {
-    var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-}
-var emailInput = document.getElementById("emailInput");
-var validationMessage = document.getElementById("emailValidationMessage");
-emailInput.addEventListener("keyup", function() {
-    var email = emailInput.value;
-    if (validateEmail(email)) {
-        validationMessage.textContent = "Email is valid";
-        validationMessage.style.color = "green";
-    } else {
-        validationMessage.textContent = "Email is invalid";
-        validationMessage.style.color = "red";
-    }
-});
-function validatePassword(password) {
-    if (password.length < 8) {
-        return false;
-    }
+  function ValidateForm(){
+      var nomValue = nomElement.value;
+      var prenomValue = prenomElement.value;
+      var telValue = telElement.value;
+      var dateValue = dateElement.value; 
+      var passwordValue = passwordElement.value;
+      
+      var nomError = document.getElementById("nomError");
+      var prenomError = document.getElementById("prenomError");
+      var telError = document.getElementById("telError");
+      var dateError = document.getElementById("dateError");
+      var passwordError = document.getElementById("passwordError");
 
-    var hasLowercase = /[a-z]/.test(password);
-    var hasUppercase = /[A-Z]/.test(password);
-    var hasDigit = /\d/.test(password);
+      var nomCorrect = document.getElementById("nomCorrect");
+      var prenomCorrect = document.getElementById("prenomCorrect");
+      var telCorrect = document.getElementById("telCorrect");
+      var dateCorrect = document.getElementById("dateCorrect");
+      var passwordCorrect = document.getElementById("passwordCorrect");
 
-    return hasLowercase && hasUppercase && hasDigit;
-}
-function validatetel()
-{
-    var telvalue=elementtel.value
-    var pattern=/^[0-9]{8}$/
-    if(!telvalue.match(pattern))
-    {
-        telError.innerHTML="<span style='color: red'>Numero de telephone doit contenir exactement 8 chiffres</span>";
-    }else
-    {
-        telError.innerHTML="<span style='color: green'>Correct</span>";
+      var patternNom = /^[a-z A-Z]+$/;
+      var patternPrenom = /^[a-z A-Z]+$/;
+      var patternEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      var patternTel = /^\d{8}$/;
+      var patternPassword = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+      if(!nomValue.match(patternNom)){
+        nomError.innerHTML = "Nom incorrect";
+        nomCorrect.innerHTML="";
+      }else{
+        nomCorrect.innerHTML = "Nom correct";
+        nomError.innerHTML = "";
+      }
+
+      if(!prenomValue.match(patternPrenom)){
+        prenomError.innerHTML="Prenom incorrect";
+        prenomCorrect.innerHTML="";
+      }else{
+        prenomCorrect.innerHTML="Prenom correct";
+        prenomError.innerHTML="";
+      }
+
+      if(!telValue.match(patternTel)){
+        telError.innerHTML="Tel incorrect";
+        telCorrect.innerHTML="";
+      }else{
+        telCorrect.innerHTML="Prenom correct";
+        telError.innerHTML="";
+      }
+
+      
+
+      var currentDate = new Date();
+      var inputDate = new Date(dateValue);
+
+      if (isNaN(inputDate) || inputDate >= currentDate) {
+        dateError.innerHTML = "Date incorrect";
+        dateCorrect.innerHTML = "";
+      }else{
+        dateCorrect.innerHTML = "Date correct";
+        dateError.innerHTML = "";
+      }
+
+      if(!passwordValue.match(patternPassword)){
+        passwordError.innerHTML = "Password incorrect";
+        passwordCorrect.innerHTML = "";
+      }else{
+        passwordCorrect.innerHTML = "Password correct";
+        passwordError.innerHTML = "";
+      }
+      
+  }
+
+  emailElement.addEventListener("keyup",function(){
+    validateMail();
+  })
+
+  function validateMail(){
+    var emailError = document.getElementById("emailError");
+    var emailCorrect = document.getElementById("emailCorrect");
+    var emailValue = emailElement.value;
+    //var mailPattern = /^\S+@esprit.tn$/;
+    var mailPattern = /^[a-z A-Z 0-9 _%.+-]+@esprit.tn$/
+
+    if(!emailValue.match(mailPattern)){
+      emailError.innerHTML = "Mail inccorect";
+      emailCorrect.innerHTML = "";
+    }else{
+      emailCorrect.innerHTML = "Mail correct";
+      emailError.innerHTML = "";
     }
-}
+  }
